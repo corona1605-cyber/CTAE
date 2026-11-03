@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Agentes de Trato Digno - IMSS</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
+        h1 { color: #1a5276; border-bottom: 2px solid #1a5276; padding-bottom: 10px; }
+        h2 { color: #2e86c1; margin-top: 30px; }
+        .question { margin-bottom: 25px; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+        .question p { font-weight: bold; margin-bottom: 10px; }
+        label { display: block; margin: 8px 0; cursor: pointer; }
+        input[type="radio"] { margin-right: 10px; }
+        button { background: #1a5276; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #2e86c1; }
+        #result { margin-top: 20px; padding: 15px; border-radius: 8px; font-weight: bold; display: none; }
+        .correct { background: #d4edda; color: #155724; }
+        .incorrect { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Cuestionario: Agentes de Trato Digno – IMSS</h1>
+    <p><strong>Instrucciones:</strong> Selecciona la opción correcta para cada pregunta.</p>
+    <form id="quizForm">
+        <!-- BLOQUE 1 -->
+        <h2>Bloque 1: Marco Constitucional y Seguridad Social</h2>
+        <div class="question">
+            <p>1. El artículo 1° de la Constitución Política de los Estados Unidos Mexicanos establece principalmente:</p>
+            <label><input type="radio" name="q1" value="a"> a) La libertad de trabajo y previsión social</label>
+            <label><input type="radio" name="q1" value="b"> b) El reconocimiento de los derechos humanos y la prohibición de discriminación</label>
+            <label><input type="radio" name="q1" value="c"> c) La organización del IMSS como organismo fiscal autónomo</label>
+            <label><input type="radio" name="q1" value="d"> d) El derecho a la salud como garantía individual</label>
+        </div>
+        <div class="question">
+            <p>2. El artículo 4° constitucional, en relación con el derecho a la salud, implica para el personal de trato digno:</p>
+            <label><input type="radio" name="q2" value="a"> a) Una obligación de resultado sobre la curación del paciente</label>
+            <label><input type="radio" name="q2" value="b"> b) Un deber de orientación oportuna y trato digno como parte del acceso efectivo a la salud</label>
+            <label><input type="radio" name="q2" value="c"> c) Una facultad discrecional para negar información</label>
+            <label><input type="radio" name="q2" value="d"> d) Solo una declaración programática sin efectos prácticos</label>
+        </div>
+        <div class="question">
+            <p>3. El artículo 123, apartado A, fracción XXIX, constitucional se relaciona con:</p>
+            <label><input type="radio" name="q3" value="a"> a) La libertad de expresión</label>
+            <label><input type="radio" name="q3" value="b"> b) La seguridad social y la previsión social para trabajadores</label>
+            <label><input type="radio" name="q3" value="c"> c) La protección de datos personales</label>
+            <label><input type="radio" name="q3" value="d"> d) La transparencia gubernamental</label>
+        </div>
+        <div class="question">
+            <p>4. La Ley del Seguro Social (artículos 1°-26°) regula principalmente:</p>
+            <label><input type="radio" name="q4" value="a"> a) El procedimiento penal federal</label>
+            <label><input type="radio" name="q4" value="b"> b) La organización, régimen obligatorio y prestaciones del IMSS</label>
+            <label><input type="radio" name="q4" value="c"> c) La estructura del Poder Judicial</label>
+            <label><input type="radio" name="q4" value="d"> d) Las obligaciones fiscales de las empresas</label>
+        </div>
+        <div class="question">
+            <p>5. Según la Ley del Seguro Social, los derechohabientes son:</p>
+            <label><input type="radio" name="q5" value="a"> a) Solo los trabajadores activos</label>
+            <label><input type="radio" name="q5" value="b"> b) El asegurado, el pensionado y los beneficiarios con derecho vigente</label>
+            <label><input type="radio" name="q5" value="c"> c) Únicamente los patrones</label>
+            <label><input type="radio" name="q5" value="d"> d) Cualquier persona que solicite servicios médicos</label>
+        </div>
+
+        <!-- BLOQUE 2 -->
+        <h2>Bloque 2: Transparencia y Protección de Datos</h2>
+        <div class="question">
+            <p>6. La Ley General de Transparencia y Acceso a la Información Pública tiene como principio rector:</p>
+            <label><input type="radio" name="q6" value="a"> a) El secreto administrativo</label>
+            <label><input type="radio" name="q6" value="b"> b) La máxima publicidad</label>
+            <label><input type="radio" name="q6" value="c"> c) La discrecionalidad del sujeto obligado</label>
+            <label><input type="radio" name="q6" value="d"> d) La confidencialidad absoluta</label>
+        </div>
+        <div class="question">
+            <p>7. Un derechohabiente solicita información sobre su expediente médico. Conforme a la Ley General de Protección de Datos Personales, el personal debe:</p>
+            <label><input type="radio" name="q7" value="a"> a) Negar la información por ser confidencial</label>
+            <label><input type="radio" name="q7" value="b"> b) Entregarla solo si lo autoriza el jefe inmediato</label>
+            <label><input type="radio" name="q7" value="c"> c) Atender la solicitud de acceso cumpliendo los requisitos y plazos legales</label>
+            <label><input type="radio" name="q7" value="d"> d) Remitirlo directamente al Ministerio Público</label>
+        </div>
+        <div class="question">
+            <p>8. El principio de "licitud" en el tratamiento de datos personales implica que:</p>
+            <label><input type="radio" name="q8" value="a"> a) Se pueden usar los datos para cualquier fin institucional</label>
+            <label><input type="radio" name="q8" value="b"> b) El tratamiento debe fundarse en una disposición legal y limitarse a las finalidades previstas</label>
+            <label><input type="radio" name="q8" value="c"> c) El consentimiento del titular es siempre innecesario</label>
+            <label><input type="radio" name="q8" value="d"> d) Los datos pueden compartirse libremente con terceros</label>
+        </div>
+        <div class="question">
+            <p>9. Una solicitud de acceso a la información pública debe ser atendida por:</p>
+            <label><input type="radio" name="q9" value="a"> a) Cualquier área que reciba la solicitud, en el momento</label>
+            <label><input type="radio" name="q9" value="b"> b) La Unidad de Transparencia del sujeto obligado</label>
+            <label><input type="radio" name="q9" value="c"> c) El área de recursos humanos</label>
+            <label><input type="radio" name="q9" value="d"> d) El sindicato del IMSS</label>
+        </div>
+
+        <!-- BLOQUE 3 -->
+        <h2>Bloque 3: Responsabilidades Administrativas</h2>
+        <div class="question">
+            <p>10. La Ley General de Responsabilidades Administrativas clasifica las faltas en:</p>
+            <label><input type="radio" name="q10" value="a"> a) Leves y graves</label>
+            <label><input type="radio" name="q10" value="b"> b) Graves y no graves</label>
+            <label><input type="radio" name="q10" value="c"> c) Civiles y penales</label>
+            <label><input type="radio" name="q10" value="d"> d) Administrativas y laborales</label>
+        </div>
+        <div class="question">
+            <p>11. Un Agente de Trato Digno que divulga información confidencial de un derechohabiente podría incurrir en:</p>
+            <label><input type="radio" name="q11" value="a"> a) Una falta administrativa no grave, únicamente</label>
+            <label><input type="radio" name="q11" value="b"> b) Una falta administrativa grave, según las circunstancias</label>
+            <label><input type="radio" name="q11" value="c"> c) Una conducta irrelevante para la ley</label>
+            <label><input type="radio" name="q11" value="d"> d) Solo una amonestación verbal</label>
+        </div>
+        <div class="question">
+            <p>12. El artículo 49 de la Ley General de Responsabilidades Administrativas se refiere a:</p>
+            <label><input type="radio" name="q12" value="a"> a) La definición de servidor público</label>
+            <label><input type="radio" name="q12" value="b"> b) Las faltas administrativas en general y los principios que rigen la función pública</label>
+            <label><input type="radio" name="q12" value="c"> c) El procedimiento penal</label>
+            <label><input type="radio" name="q12" value="d"> d) La estructura del IMSS</label>
+        </div>
+
+        <!-- BLOQUE 4 -->
+        <h2>Bloque 4: No Discriminación e Igualdad</h2>
+        <div class="question">
+            <p>13. La Ley Federal para Prevenir y Eliminar la Discriminación define discriminación como:</p>
+            <label><input type="radio" name="q13" value="a"> a) Cualquier distinción basada en el mérito académico</label>
+            <label><input type="radio" name="q13" value="b"> b) Toda distinción, exclusión o restricción que obstaculice derechos por motivos como sexo, género, discapacidad, etc.</label>
+            <label><input type="radio" name="q13" value="c"> c) Solo actos violentos físicos</label>
+            <label><input type="radio" name="q13" value="d"> d) Únicamente conductas intencionales</label>
+        </div>
+        <div class="question">
+            <p>14. El artículo 13 de la Ley Federal para Prevenir y Eliminar la Discriminación establece medidas a favor de:</p>
+            <label><input type="radio" name="q14" value="a"> a) Los patrones</label>
+            <label><input type="radio" name="q14" value="b"> b) Las personas con discapacidad</label>
+            <label><input type="radio" name="q14" value="c"> c) Los funcionarios públicos</label>
+            <label><input type="radio" name="q14" value="d"> d) Las empresas privadas</label>
+        </div>
+        <div class="question">
+            <p>15. La Ley General para la Igualdad entre Mujeres y Hombres busca:</p>
+            <label><input type="radio" name="q15" value="a"> a) La igualdad formal únicamente en el texto legal</label>
+            <label><input type="radio" name="q15" value="b"> b) La igualdad sustantiva, que implica acceso real a derechos y oportunidades</label>
+            <label><input type="radio" name="q15" value="c"> c) La superioridad de un género sobre otro</label>
+            <label><input type="radio" name="q15" value="d"> d) Regular solo el ámbito laboral privado</label>
+        </div>
+        <div class="question">
+            <p>16. La CEDAW obliga a los Estados a:</p>
+            <label><input type="radio" name="q16" value="a"> a) Solo emitir declaraciones públicas</label>
+            <label><input type="radio" name="q16" value="b"> b) Adoptar medidas legislativas y de política pública para eliminar la discriminación</label>
+            <label><input type="radio" name="q16" value="c"> c) Excluir a los hombres de todos los espacios</label>
+            <label><input type="radio" name="q16" value="d"> d) Regular únicamente el ámbito educativo</label>
+        </div>
+        <div class="question">
+            <p>17. Un Agente de Trato Digno atiende a una persona con discapacidad visual que solicita orientación. La acción correcta es:</p>
+            <label><input type="radio" name="q17" value="a"> a) Entregarle un folleto escrito y despedirlo</label>
+            <label><input type="radio" name="q17" value="b"> b) Explicarle verbalmente la información, ofrecer formatos accesibles y asegurarse de su comprensión</label>
+            <label><input type="radio" name="q17" value="c"> c) Indicarle que regrese con un acompañante</label>
+            <label><input type="radio" name="q17" value="d"> d) Negar la atención por falta de protocolo</label>
+        </div>
+
+        <!-- BLOQUE 5 -->
+        <h2>Bloque 5: Hostigamiento y Acoso Sexual</h2>
+        <div class="question">
+            <p>18. El Protocolo para Prevenir, Atender y Sancionar el Hostigamiento Sexual y Acoso Sexual del IMSS busca:</p>
+            <label><input type="radio" name="q18" value="a"> a) Solo sancionar al agresor</label>
+            <label><input type="radio" name="q18" value="b"> b) Prevenir, atender y sancionar conductas, protegiendo a la víctima</label>
+            <label><input type="radio" name="q18" value="c"> c) Regular las relaciones sentimentales entre compañeros</label>
+            <label><input type="radio" name="q18" value="d"> d) Eliminar los espacios de denuncia</label>
+        </div>
+        <div class="question">
+            <p>19. La diferencia entre hostigamiento sexual y acoso sexual radica principalmente en:</p>
+            <label><input type="radio" name="q19" value="a"> a) El hostigamiento implica subordinación jerárquica; el acoso no necesariamente</label>
+            <label><input type="radio" name="q19" value="b"> b) El acoso es más grave que el hostigamiento</label>
+            <label><input type="radio" name="q19" value="c"> c) Solo el hostigamiento es sancionable</label>
+            <label><input type="radio" name="q19" value="d"> d) No existe diferencia legal</label>
+        </div>
+        <div class="question">
+            <p>20. Si un usuario del IMSS realiza comentarios de connotación sexual a un Agente de Trato Digno de forma reiterada, la acción institucional correcta es:</p>
+            <label><input type="radio" name="q20" value="a"> a) Ignorar la conducta para no generar conflicto</label>
+            <label><input type="radio" name="q20" value="b"> b) Orientar a la persona afectada sobre las vías de denuncia y activar el protocolo correspondiente</label>
+            <label><input type="radio" name="q20" value="c"> c) Resolverlo de manera informal entre las partes</label>
+            <label><input type="radio" name="q20" value="d"> d) Sancionar directamente al usuario sin procedimiento</label>
+        </div>
+
+        <!-- BLOQUE 6 -->
+        <h2>Bloque 6: Buen Trato y Lenguaje Incluyente</h2>
+        <div class="question">
+            <p>21. El programa SER IMSS se basa en las acciones de:</p>
+            <label><input type="radio" name="q21" value="a"> a) Sancionar, Evitar, Reportar</label>
+            <label><input type="radio" name="q21" value="b"> b) Saludar, Escuchar, Responder</label>
+            <label><input type="radio" name="q21" value="c"> c) Supervisar, Evaluar, Regular</label>
+            <label><input type="radio" name="q21" value="d"> d) Seleccionar, Entrenar, Repetir</label>
+        </div>
+        <div class="question">
+            <p>22. La Guía de Lenguaje Incluyente y No Sexista del IMSS tiene como propósito:</p>
+            <label><input type="radio" name="q22" value="a"> a) Imponer un vocabulario único</label>
+            <label><input type="radio" name="q22" value="b"> b) Promover una comunicación que evite sesgos de género y discriminación</label>
+            <label><input type="radio" name="q22" value="c"> c) Prohibir el uso del masculino genérico en todos los contextos</label>
+            <label><input type="radio" name="q22" value="d"> d) Regular solo los documentos oficiales</label>
+        </div>
+        <div class="question">
+            <p>23. Ante una persona derechohabiente que llega molesta por una larga espera, el Protocolo para Tratar con Personas Molestas sugiere:</p>
+            <label><input type="radio" name="q23" value="a"> a) Indicarle que guarde silencio</label>
+            <label><input type="radio" name="q23" value="b"> b) Escuchar activamente, validar su molestia y ofrecer alternativas de solución</label>
+            <label><input type="radio" name="q23" value="c"> c) Remitirlo inmediatamente con seguridad</label>
+            <label><input type="radio" name="q23" value="d"> d) Ignorar la queja y continuar con el trámite</label>
+        </div>
+        <div class="question">
+            <p>24. Para dar malas noticias médicas en primer nivel, el protocolo recomienda:</p>
+            <label><input type="radio" name="q24" value="a"> a) Informar de la manera más rápida posible para no generar angustia</label>
+            <label><input type="radio" name="q24" value="b"> b) Usar lenguaje técnico para mostrar autoridad</label>
+            <label><input type="radio" name="q24" value="c"> c) Preparar el contexto, informar con claridad y empatía, y ofrecer acompañamiento</label>
+            <label><input type="radio" name="q24" value="d"> d) Delegar la comunicación a personal administrativo</label>
+        </div>
+
+        <!-- BLOQUE 7 -->
+        <h2>Bloque 7: Sistema SIADE y Análisis de Datos</h2>
+        <div class="question">
+            <p>25. El Sistema SIADE en el IMSS se utiliza para:</p>
+            <label><input type="radio" name="q25" value="a"> a) Gestionar las peticiones ciudadanas y dar seguimiento a las solicitudes</label>
+            <label><input type="radio" name="q25" value="b"> b) Administrar las cuentas de nómina</label>
+            <label><input type="radio" name="q25" value="c"> c) Controlar el acceso a las instalaciones</label>
+            <label><input type="radio" name="q25" value="d"> d) Registrar las incapacidades médicas</label>
+        </div>
+        <div class="question">
+            <p>26. Un análisis estadístico de las peticiones ciudadanas registradas en SIADE puede servir para:</p>
+            <label><input type="radio" name="q26" value="a"> a) Identificar patrones de quejas recurrentes y áreas de mejora</label>
+            <label><input type="radio" name="q26" value="b"> b) Justificar sanciones sin procedimiento</label>
+            <label><input type="radio" name="q26" value="c"> c) Eliminar la necesidad de atender a los derechohabientes</label>
+            <label><input type="radio" name="q26" value="d"> d) Sustituir la transparencia proactiva</label>
+        </div>
+        <div class="question">
+            <p>27. Al elaborar un tablero de control (dashboard) con datos de SIADE, el principio de protección de datos personales exige:</p>
+            <label><input type="radio" name="q27" value="a"> a) Publicar todos los datos en bruto</label>
+            <label><input type="radio" name="q27" value="b"> b) Disociar los datos personales y presentar solo información agregada</label>
+            <label><input type="radio" name="q27" value="c"> c) Ocultar toda la información al público</label>
+            <label><input type="radio" name="q27" value="d"> d) Solicitar consentimiento a cada derechohabiente cada vez que se consulte el sistema</label>
+        </div>
+
+        <!-- BLOQUE 8 -->
+        <h2>Bloque 8: Preguntas Analíticas</h2>
+        <div class="question">
+            <p>28. Un Agente de Trato Digno recibe una solicitud verbal de información sobre el estado de salud de un paciente por parte de un supuesto familiar. No hay documento que acredite el parentesco ni autorización del paciente. La conducta correcta es:</p>
+            <label><input type="radio" name="q28" value="a"> a) Proporcionar la información por cortesía, ya que se trata de un familiar</label>
+            <label><input type="radio" name="q28" value="b"> b) Negar la información y explicar los requisitos legales para acceder a datos de terceros</label>
+            <label><input type="radio" name="q28" value="c"> c) Consultar al médico tratante y decidir según su criterio</label>
+            <label><input type="radio" name="q28" value="d"> d) Entregar la información solo si el familiar insiste</label>
+        </div>
+        <div class="question">
+            <p>29. En el marco de la Ley General para la Igualdad entre Mujeres y Hombres, ¿por qué es relevante que los informes estadísticos del SIADE desagreguen datos por sexo?</p>
+            <label><input type="radio" name="q29" value="a"> a) Porque es un requisito burocrático sin impacto real</label>
+            <label><input type="radio" name="q29" value="b"> b) Porque permite detectar brechas de atención y diseñar acciones de igualdad sustantiva</label>
+            <label><input type="radio" name="q29" value="c"> c) Porque facilita la asignación de culpas</label>
+            <label><input type="radio" name="q29" value="d"> d) Porque solo se requiere para cumplir con la CEDAW, no para la operación diaria</label>
+        </div>
+        <div class="question">
+            <p>30. Un Agente de Trato Digno detecta que en su unidad médica las quejas por trato inadecuado se concentran en un turno específico. Con base en el enfoque de análisis de datos y el Sistema SIADE, la acción más pertinente es:</p>
+            <label><input type="radio" name="q30" value="a"> a) Sancionar a todo el personal del turno sin investigación previa</label>
+            <label><input type="radio" name="q30" value="b"> b) Analizar los datos del SIADE, identificar causas y proponer un plan de mejora con indicadores medibles</label>
+            <label><input type="radio" name="q30" value="c"> c) Ignorar el hallazgo por no ser parte de sus funciones</label>
+            <label><input type="radio" name="q30" value="d"> d) Reportar el hecho al sindicato y esperar instrucciones</label>
+        </div>
+
+        <button type="button" onclick="calificar()">Calificar cuestionario</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        const answers = {
+            q1:'b', q2:'b', q3:'b', q4:'b', q5:'b',
+            q6:'b', q7:'c', q8:'b', q9:'b',
+            q10:'b', q11:'b', q12:'b',
+            q13:'b', q14:'b', q15:'b', q16:'b', q17:'b',
+            q18:'b', q19:'a', q20:'b',
+            q21:'b', q22:'b', q23:'b', q24:'c',
+            q25:'a', q26:'a', q27:'b',
+            q28:'b', q29:'b', q30:'b'
+        };
+        function calificar() {
+            let correctas = 0;
+            let total = 30;
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) correctas++;
+            }
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            const porcentaje = Math.round((correctas / total) * 100);
+            resultDiv.innerHTML = `Resultado: <strong>${correctas} / ${total}</strong> correctas (${porcentaje}%)`;
+            resultDiv.className = porcentaje >= 70 ? 'correct' : 'incorrect';
+        }
+    </script>
+</body>
+</html>
