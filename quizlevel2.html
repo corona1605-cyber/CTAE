@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Avanzado: Agentes de Trato Digno – IMSS</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 850px; margin: 30px auto; padding: 20px; line-height: 1.6; background-color: #f4f6f9; color: #2c3e50; }
+        h1 { color: #1a5276; border-bottom: 3px solid #1a5276; padding-bottom: 10px; font-size: 1.6em; }
+        h2 { color: #2e86c1; margin-top: 35px; font-size: 1.2em; border-left: 4px solid #2e86c1; padding-left: 10px; }
+        .question { margin-bottom: 22px; padding: 18px; background: #ffffff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+        .question p { font-weight: 600; margin-bottom: 12px; color: #1a5276; }
+        label { display: block; margin: 9px 0; cursor: pointer; padding: 8px 10px; border-radius: 5px; transition: background 0.2s; }
+        label:hover { background: #eaf2f8; }
+        input[type="radio"] { margin-right: 10px; transform: scale(1.1); }
+        button { background: #1a5276; color: white; padding: 14px 40px; border: none; border-radius: 6px; font-size: 17px; cursor: pointer; margin-top: 25px; font-weight: 600; transition: background 0.3s; display: block; width: 100%; max-width: 320px; margin-left: auto; margin-right: auto; }
+        button:hover { background: #2e86c1; }
+        #result { margin-top: 25px; padding: 20px; border-radius: 8px; font-weight: bold; font-size: 1.1em; display: none; text-align: center; }
+        .correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .incorrect { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+    </style>
+</head>
+<body>
+    <h1>Cuestionario de Evaluación Avanzada: Agentes de Trato Digno – IMSS</h1>
+    <p><strong>Instrucciones:</strong> Selecciona la opción correcta. Este cuestionario evalúa la aplicación normativa en escenarios complejos.</p>
+    <form id="quizForm">
+        <!-- BLOQUE 1 -->
+        <h2>Bloque 1: Marco Constitucional y Derechos Humanos</h2>
+        <div class="question">
+            <p>1. Un Agente de Trato Digno se enfrenta a una solicitud de información que podría vulnerar la privacidad de un menor de edad. Bajo el principio de interés superior de la niñez (art. 4° CPEUM), la actuación correcta es:</p>
+            <label><input type="radio" name="q1" value="a"> a) Aplicar la máxima publicidad sin excepciones, conforme al artículo 6° constitucional</label>
+            <label><input type="radio" name="q1" value="b"> b) Ponderar el derecho de acceso a la información frente a la protección de datos del menor, aplicando la prueba de daño y restringiendo el acceso solo si existe riesgo real</label>
+            <label><input type="radio" name="q1" value="c"> c) Negar automáticamente toda información que mencione a menores, sin análisis adicional</label>
+            <label><input type="radio" name="q1" value="d"> d) Consultar únicamente al área jurídica y suspender el trámite hasta obtener respuesta</label>
+        </div>
+        <div class="question">
+            <p>2. El artículo 123, apartado A, fracción XXIX, de la CPEUM faculta al Congreso para expedir leyes sobre seguridad social. En el contexto del IMSS, esta facultad se materializa principalmente a través de:</p>
+            <label><input type="radio" name="q2" value="a"> a) La Ley Federal del Trabajo, en materia de riesgos de trabajo</label>
+            <label><input type="radio" name="q2" value="b"> b) La Ley del Seguro Social, que regula el régimen obligatorio y las prestaciones institucionales</label>
+            <label><input type="radio" name="q2" value="c"> c) El Reglamento Interior del IMSS, que define la estructura orgánica</label>
+            <label><input type="radio" name="q2" value="d"> d) La Ley General de Salud, en lo relativo a atención médica</label>
+        </div>
+
+        <!-- BLOQUE 2 -->
+        <h2>Bloque 2: Transparencia y Protección de Datos Personales</h2>
+        <div class="question">
+            <p>3. Un derechohabiente solicita, vía SIADE, copia de su expediente clínico completo. El área médica se niega argumentando que contiene "información sensible". Conforme a la LGPDPPSO, la respuesta institucional correcta es:</p>
+            <label><input type="radio" name="q3" value="a"> a) Confirmar la negativa, pues los datos de salud son sensibles y no pueden entregarse nunca</label>
+            <label><input type="radio" name="q3" value="b"> b) Entregar el expediente al titular del dato, pues el derecho de acceso prevalece sobre la clasificación de sensible cuando se trata del propio titular</label>
+            <label><input type="radio" name="q3" value="c"> c) Remitir la solicitud a la Unidad de Transparencia para que esta decida si procede</label>
+            <label><input type="radio" name="q3" value="d"> d) Entregar solo la información que el médico tratante autorice</label>
+        </div>
+        <div class="question">
+            <p>4. En la elaboración de un dashboard con datos del SIADE para identificar patrones de quejas, el principio de "disociación" de la LGPDPPSO implica que:</p>
+            <label><input type="radio" name="q4" value="a"> a) Se deben eliminar todos los campos de identificación personal antes de cualquier análisis estadístico</label>
+            <label><input type="radio" name="q4" value="b"> b) Los datos deben ser tratados de modo que no puedan asociarse a un titular identificado o identificable, permitiendo su uso agregado para fines estadísticos</label>
+            <label><input type="radio" name="q4" value="c"> c) Solo se pueden usar datos de personas que hayan otorgado consentimiento expreso para el análisis</label>
+            <label><input type="radio" name="q4" value="d"> d) La disociación solo aplica a datos sensibles, no a datos personales ordinarios</label>
+        </div>
+        <div class="question">
+            <p>5. Un Agente de Trato Digno recibe una llamada telefónica de alguien que se identifica como "familiar preocupado" y solicita información sobre el diagnóstico de un paciente internado. No hay autorización del paciente ni documento que acredite parentesco. La conducta correcta, con base en la LGPDPPSO y el principio de licitud, es:</p>
+            <label><input type="radio" name="q5" value="a"> a) Proporcionar la información verbalmente, dado que el familiar tiene un interés legítimo</label>
+            <label><input type="radio" name="q5" value="b"> b) Negar la información, explicar los requisitos legales para el acceso por terceros y orientar sobre el procedimiento correspondiente</label>
+            <label><input type="radio" name="q5" value="c"> c) Consultar al médico tratante y, si este autoriza, entregar la información</label>
+            <label><input type="radio" name="q5" value="d"> d) Proporcionar solo información general, sin datos identificables del paciente</label>
+        </div>
+
+        <!-- BLOQUE 3 -->
+        <h2>Bloque 3: Responsabilidades Administrativas y Ética</h2>
+        <div class="question">
+            <p>6. Un Agente de Trato Digno divulga en redes sociales, sin autorización, el nombre y diagnóstico de un derechohabiente conocido públicamente. Conforme a la LGRA, esta conducta puede configurar:</p>
+            <label><input type="radio" name="q6" value="a"> a) Una falta administrativa no grave, sancionable solo con amonestación</label>
+            <label><input type="radio" name="q6" value="b"> b) Una falta administrativa grave, por vulneración a la protección de datos personales y posible conflicto de interés</label>
+            <label><input type="radio" name="q6" value="c"> c) Una conducta atípica, pues la LGRA no regula el manejo de datos personales</label>
+            <label><input type="radio" name="q6" value="d"> d) Una falta laboral sujeta exclusivamente al régimen sindical</label>
+        </div>
+        <div class="question">
+            <p>7. El artículo 49 de la LGRA establece que las faltas administrativas de los servidores públicos se clasifican en graves y no graves. ¿Cuál de los siguientes criterios es determinante para calificar una falta como grave?</p>
+            <label><input type="radio" name="q7" value="a"> a) La cuantía económica del daño, exclusivamente</label>
+            <label><input type="radio" name="q7" value="b"> b) La naturaleza de la conducta, los deberes infringidos, la afectación al servicio público y la existencia de beneficios o conflictos de interés</label>
+            <label><input type="radio" name="q7" value="c"> c) La reincidencia del servidor público, únicamente</label>
+            <label><input type="radio" name="q7" value="d"> d) La opinión del jefe inmediato sobre la conducta</label>
+        </div>
+
+        <!-- BLOQUE 4 -->
+        <h2>Bloque 4: Igualdad, No Discriminación y Perspectiva de Género</h2>
+        <div class="question">
+            <p>8. La Ley General para la Igualdad Sustantiva entre Mujeres y Hombres distingue entre "igualdad formal" e "igualdad sustantiva". Un Agente de Trato Digno que aplica correctamente este marco debe entender que la igualdad sustantiva implica:</p>
+            <label><input type="radio" name="q8" value="a"> a) Tratar a todas las personas exactamente igual, sin distinción alguna</label>
+            <label><input type="radio" name="q8" value="b"> b) Reconocer que existen desigualdades estructurales y adoptar medidas que garanticen el acceso real a derechos y oportunidades</label>
+            <label><input type="radio" name="q8" value="c"> c) Aplicar cuotas de género en todos los trámites institucionales</label>
+            <label><input type="radio" name="q8" value="d"> d) Eliminar cualquier referencia al sexo en los documentos oficiales</label>
+        </div>
+        <div class="question">
+            <p>9. Una persona con discapacidad auditiva acude al módulo de atención. El protocolo de trato adecuado y la LFPED exigen que el Agente de Trato Digno:</p>
+            <label><input type="radio" name="q9" value="a"> a) Le entregue un folleto con la información para que lo lea en casa</label>
+            <label><input type="radio" name="q9" value="b"> b) Procure comunicación efectiva, ya sea mediante lenguaje de señas (si está capacitado), apoyo de intérprete, escritura o medios alternativos, asegurando la comprensión de la información</label>
+            <label><input type="radio" name="q9" value="c"> c) Le indique que regrese acompañada de alguien que pueda interpretar</label>
+            <label><input type="radio" name="q9" value="d"> d) Remita el caso a trabajo social, pues no es competencia del módulo</label>
+        </div>
+        <div class="question">
+            <p>10. Un Agente de Trato Digno detecta que en las estadísticas de quejas de su unidad, las mujeres reportan sistemáticamente peor trato que los hombres. Con base en la Ley General para la Igualdad Sustantiva y el enfoque de análisis de datos, la acción más pertinente es:</p>
+            <label><input type="radio" name="q10" value="a"> a) Concluir que se trata de una percepción subjetiva sin fundamento</label>
+            <label><input type="radio" name="q10" value="b"> b) Analizar los datos desagregados, identificar las causas de la brecha y proponer acciones de mejora con indicadores de género</label>
+            <label><input type="radio" name="q10" value="c"> c) Aumentar el número de quejas de hombres para equilibrar la estadística</label>
+            <label><input type="radio" name="q10" value="d"> d) Remitir el hallazgo al área jurídica sin realizar análisis adicional</label>
+        </div>
+
+        <!-- BLOQUE 5 -->
+        <h2>Bloque 5: Hostigamiento y Acoso Sexual</h2>
+        <div class="question">
+            <p>11. Conforme al protocolo del IMSS y la distinción legal, el "hostigamiento sexual" se configura cuando:</p>
+            <label><input type="radio" name="q11" value="a"> a) Cualquier persona realiza comentarios de connotación sexual en el trabajo, sin importar la relación jerárquica</label>
+            <label><input type="radio" name="q11" value="b"> b) Existe un ejercicio de poder expresado en conductas verbales o físicas de connotación sexual, en una relación de subordinación jerárquica</label>
+            <label><input type="radio" name="q11" value="c"> c) Solo cuando hay contacto físico no consentido</label>
+            <label><input type="radio" name="q11" value="d"> d) Únicamente cuando la víctima presenta una denuncia formal ante el Ministerio Público</label>
+        </div>
+        <div class="question">
+            <p>12. Una Agente de Trato Digno recibe insinuaciones sexuales reiteradas de su jefe inmediato. Ella teme represalias y no desea denunciar formalmente. Según el protocolo, la actuación institucional correcta es:</p>
+            <label><input type="radio" name="q12" value="a"> a) Respetar su decisión y no hacer nada, pues la denuncia es un derecho, no una obligación</label>
+            <label><input type="radio" name="q12" value="b"> b) Informarle sobre las personas consejeras, las medidas de protección disponibles y las vías de denuncia, sin presionarla, pero dejando registro de la orientación brindada</label>
+            <label><input type="radio" name="q12" value="c"> c) Denunciar de oficio ante el Órgano Interno de Control, sin informar a la afectada</label>
+            <label><input type="radio" name="q12" value="d"> d) Trasladar el caso al sindicato para que este decida la conducta a seguir</label>
+        </div>
+
+        <!-- BLOQUE 6 -->
+        <h2>Bloque 6: Buen Trato, SIADE y Análisis de Datos</h2>
+        <div class="question">
+            <p>13. El programa SER IMSS (Saludar, Escuchar, Responder) se implementó en 2016 con un enfoque de transformación cultural. Un Agente de Trato Digno que aplica correctamente este protocolo en una interacción con un usuario molesto debe:</p>
+            <label><input type="radio" name="q13" value="a"> a) Saludar, escuchar sin interrumpir y responder con lenguaje claro, validando la emoción del usuario antes de ofrecer soluciones</label>
+            <label><input type="radio" name="q13" value="b"> b) Saludar, explicar de inmediato las políticas institucionales y responder con lenguaje técnico</label>
+            <label><input type="radio" name="q13" value="c"> c) Escuchar, pero responder solo si el usuario se calma</label>
+            <label><input type="radio" name="q13" value="d"> d) Derivar al usuario a seguridad si levanta la voz</label>
+        </div>
+        <div class="question">
+            <p>14. En el análisis de peticiones ciudadanas registradas en SIADE, un Agente detecta que el 40% de las quejas de una unidad médica se refieren a "tiempo de espera excesivo" en el turno vespertino. La acción más alineada con el enfoque de análisis y mejora continua es:</p>
+            <label><input type="radio" name="q14" value="a"> a) Reportar al personal del turno vespertino por negligencia</label>
+            <label><input type="radio" name="q14" value="b"> b) Cruzar los datos con indicadores de demanda, personal asignado y tiempos de consulta para identificar la causa raíz y proponer una intervención medible</label>
+            <label><input type="radio" name="q14" value="c"> c) Ignorar el dato, pues las quejas por tiempo de espera son normales en todas las unidades</label>
+            <label><input type="radio" name="q14" value="d"> d) Aumentar el número de módulos de atención sin analizar la causa del problema</label>
+        </div>
+        <div class="question">
+            <p>15. Un Agente de Trato Digno debe elaborar un informe trimestral de quejas para la Coordinación Delegacional. Para cumplir simultáneamente con la LGTAIP y la LGPDPPSO, el informe debe:</p>
+            <label><input type="radio" name="q15" value="a"> a) Incluir nombres y números de seguridad social de los quejosos para facilitar el seguimiento</label>
+            <label><input type="radio" name="q15" value="b"> b) Presentar datos agregados y disociados, sin información que permita identificar a los titulares, y ser claro, veraz y oportuno</label>
+            <label><input type="radio" name="q15" value="c"> c) Publicarse en el portal de transparencia con todos los datos en bruto para garantizar la máxima publicidad</label>
+            <label><input type="radio" name="q15" value="d"> d) Ser confidencial en su totalidad y no compartirse con ninguna instancia</label>
+        </div>
+
+        <!-- BLOQUE 7 -->
+        <h2>Bloque 7: Escenarios Analíticos Complejos</h2>
+        <div class="question">
+            <p>16. Un Agente de Trato Digno recibe una solicitud de un derechohabiente que exige ser atendido "por un médico hombre, porque las doctoras no Inspiran confianza". La conducta correcta, considerando la LFPED y el protocolo de trato digno, es:</p>
+            <label><input type="radio" name="q16" value="a"> a) Acceder a la petición para evitar un conflicto</label>
+            <label><input type="radio" name="q16" value="b"> b) Explicar respetuosamente que la asignación de personal médico se basa en criterios clínicos y de disponibilidad, no en prejuicios de género, y ofrecer alternativas si existen</label>
+            <label><input type="radio" name="q16" value="c"> c) Negar cualquier atención hasta que el usuario modifique su solicitud</label>
+            <label><input type="radio" name="q16" value="d"> d) Remitir al usuario con el área de trabajo social para que "reeduque" su percepción</label>
+        </div>
+        <div class="question">
+            <p>17. El "Protocolo para dar Malas Noticias Médicas en Primer Nivel" recomienda una comunicación gradual y empática. Si un Agente de Trato Digno presencia que un médico informa un diagnóstico grave de forma abrupta y sin privacidad, la acción institucional más adecuada es:</p>
+            <label><input type="radio" name="q17" value="a"> a) Interrumpir la consulta para corregir al médico frente al paciente</label>
+            <label><input type="radio" name="q17" value="b"> b) Registrar la observación y reportarla por los canales correspondientes para capacitación y mejora del protocolo, sin exponer al paciente a una confrontación</label>
+            <label><input type="radio" name="q17" value="c"> c) No hacer nada, pues es competencia exclusiva del área médica</label>
+            <label><input type="radio" name="q17" value="d"> d) Informar al paciente que tiene derecho a quejarse y entregarle un folleto</label>
+        </div>
+        <div class="question">
+            <p>18. Un Agente de Trato Digno detecta que un compañero está usando el sistema SIADE para consultar información de expedientes de personas conocidas, sin motivo laboral. Conforme a la LGRA y la LGPDPPSO, la conducta correcta es:</p>
+            <label><input type="radio" name="q18" value="a"> a) Confrontar al compañero en privado y pedirle que deje de hacerlo</label>
+            <label><input type="radio" name="q18" value="b"> b) Reportar la conducta a la instancia correspondiente (Órgano Interno de Control o superior jerárquico), pues se trata de un posible acceso ilícito a datos personales</label>
+            <label><input type="radio" name="q18" value="c"> c) Ignorar la situación para no afectar la relación laboral</label>
+            <label><input type="radio" name="q18" value="d"> d) Consultar también los expedientes para verificar si hay algo irregular</label>
+        </div>
+        <div class="question">
+            <p>19. La Guía de Lenguaje Incluyente y No Sexista del IMSS no busca imponer un vocabulario único, sino promover una comunicación que evite sesgos. En la práctica, un Agente de Trato Digno que aplica correctamente esta guía debe:</p>
+            <label><input type="radio" name="q19" value="a"> a) Usar siempre "las y los" en todos los documentos, sin excepción</label>
+            <label><input type="radio" name="q19" value="b"> b) Adaptar el lenguaje para que sea claro, respetuoso e incluyente, evitando expresiones que estereotipen o excluyan, sin caer en rigideces que afecten la comprensión</label>
+            <label><input type="radio" name="q19" value="c"> c) Sustituir todas las palabras en masculino por femenino para compensar</label>
+            <label><input type="radio" name="q19" value="d"> d) Eliminar cualquier referencia al género en la comunicación institucional</label>
+        </div>
+        <div class="question">
+            <p>20. Conforme a la CEDAW (artículos 2°-4°), los Estados Parte tienen la obligación de adoptar "medidas temporales especiales" (acciones afirmativas) para acelerar la igualdad de facto. Un Agente de Trato Digno que comprende este mandato debe entender que:</p>
+            <label><input type="radio" name="q20" value="a"> a) Las acciones afirmativas son discriminatorias y deben evitarse</label>
+            <label><input type="radio" name="q20" value="b"> b) Son medidas compensatorias, temporales y objetivas, orientadas a corregir desigualdades históricas, y no constituyen discriminación</label>
+            <label><input type="radio" name="q20" value="c"> c) Solo aplican en el ámbito electoral, no en la función pública</label>
+            <label><input type="radio" name="q20" value="d"> d) Son permanentes y deben mantenerse indefinidamente</label>
+        </div>
+        <div class="question">
+            <p>21. Un Agente de Trato Digno atiende a una persona adulta mayor que no puede leer ni escribir y que necesita orientación sobre un trámite. El principio de "accesibilidad" de la LGTAIP y el protocolo de trato adecuado exigen que:</p>
+            <label><input type="radio" name="q21" value="a"> a) Se le entregue un formato escrito con letra grande para que lo lleve a casa</label>
+            <label><input type="radio" name="q21" value="b"> b) Se le proporcione orientación verbal clara, se verifique la comprensión, se le acompañe en el proceso y se documente la atención brindada</label>
+            <label><input type="radio" name="q21" value="c"> c) Se le indique que regrese con un familiar que pueda leerle la información</label>
+            <label><input type="radio" name="q21" value="d"> d) Se le niegue la atención por no cumplir con los requisitos de alfabetización</label>
+        </div>
+        <div class="question">
+            <p>22. El Reglamento Interior del IMSS (Título Segundo) establece las atribuciones de la Unidad de Atención a la Derechohabiencia. En el contexto del personal TAOD/Agente de Trato Digno, la dependencia normativa de esta Unidad implica que:</p>
+            <label><input type="radio" name="q22" value="a"> a) El personal TAOD depende administrativamente de la UAD para asistencia y puntualidad</label>
+            <label><input type="radio" name="q22" value="b"> b) La UAD emite lineamientos sobre perfil, funciones, indicadores de desempeño y capacitación, mientras que la dependencia operativa recae en la Coordinación Delegacional</label>
+            <label><input type="radio" name="q22" value="c"> c) La UAD solo tiene funciones de evaluación, sin facultades normativas</label>
+            <label><input type="radio" name="q22" value="d"> d) El personal TAOD depende exclusivamente del sindicato para todos los efectos</label>
+        </div>
+        <div class="question">
+            <p>23. Un Agente de Trato Digno recibe una solicitud de información sobre el número de quejas por "trato inadecuado" en su unidad durante el último año. Un usuario solicita que se incluyan los nombres de los médicos señalados. Conforme a la LGTAIP y la LGPDPPSO, la respuesta correcta es:</p>
+            <label><input type="radio" name="q23" value="a"> a) Entregar la información completa, incluyendo nombres, pues se trata de información pública</label>
+            <label><input type="radio" name="q23" value="b"> b) Entregar los datos estadísticos agregados (número de quejas, áreas, tipos) y reservar los nombres de los servidores públicos señalados en quejas no resueltas, por afectación a su derecho de audiencia y presunción de inocencia</label>
+            <label><input type="radio" name="q23" value="c"> c) Negar toda la información por contener datos personales</label>
+            <label><input type="radio" name="q23" value="d"> d) Remitir al solicitante a la Plataforma Nacional de Transparencia para que presente una nueva solicitud</label>
+        </div>
+        <div class="question">
+            <p>24. El "Protocolo para Tratar con Personas que están Molestas" y el "Protocolo Básico de Buen Trato" comparten un principio fundamental. Este principio consiste en:</p>
+            <label><input type="radio" name="q24" value="a"> a) La autoridad del servidor público para establecer límites al usuario</label>
+            <label><input type="radio" name="q24" value="b"> b) La escucha activa y la validación de la emoción del usuario antes de ofrecer soluciones, reconociendo su derecho a expresar insatisfacción</label>
+            <label><input type="radio" name="q24" value="c"> c) La derivación inmediata a seguridad ante cualquier muestra de molestia</label>
+            <label><input type="radio" name="q24" value="d"> d) La aplicación del reglamento con rigor, independientemente del estado emocional del usuario</label>
+        </div>
+        <div class="question">
+            <p>25. La Ley Federal para Prevenir y Eliminar la Discriminación (art. 1° y 13°) establece medidas de nivelación, inclusión y acciones afirmativas. Un Agente de Trato Digno que atiende a una persona indígena que solo habla su lengua materna debe:</p>
+            <label><input type="radio" name="q25" value="a"> a) Exigirle que traiga un traductor, pues el Instituto no está obligado a proporcionarlo</label>
+            <label><input type="radio" name="q25" value="b"> b) Procurar la comunicación por todos los medios disponibles (intérprete, apoyo de terceros, medios visuales) y garantizar que comprenda la información, en cumplimiento del principio de accesibilidad e igualdad</label>
+            <label><input type="radio" name="q25" value="c"> c) Entregarle un documento escrito en español, que es la lengua oficial</label>
+            <label><input type="radio" name="q25" value="d"> d) Remitirlo a otra institución especializada en atención a pueblos indígenas</label>
+        </div>
+        <div class="question">
+            <p>26. Un Agente de Trato Digno es testigo de que un usuario insulta y amenaza a una compañera en el módulo de atención. El protocolo de hostigamiento y acoso sexual y el de personas molestas indican que la acción inmediata debe ser:</p>
+            <label><input type="radio" name="q26" value="a"> a) Intervenir para contener la agresión, proteger a la compañera, registrar lo ocurrido y activar los canales de reporte correspondientes</label>
+            <label><input type="radio" name="q26" value="b"> b) No intervenir, pues es un conflicto entre el usuario y otra persona</label>
+            <label><input type="radio" name="q26" value="c"> c) Expulsar al usuario sin registro ni seguimiento</label>
+            <label><input type="radio" name="q26" value="d"> d) Esperar a que la compañera presente la denuncia por sí misma</label>
+        </div>
+        <div class="question">
+            <p>27. El Sistema SIADE, conforme a los lineamientos del IMSS, regula el análisis de las peticiones ciudadanas en los Órganos de Operación Administrativa Desconcentrada. Su utilidad principal para un Agente de Trato Digno es:</p>
+            <label><input type="radio" name="q27" value="a"> a) Sustituir la atención presencial por atención automatizada</label>
+            <label><input type="radio" name="q27" value="b"> b) Permitir el registro, seguimiento y análisis de las peticiones para identificar áreas de mejora y dar respuesta oportuna a la derechohabiencia</label>
+            <label><input type="radio" name="q27" value="c"> c) Evaluar exclusivamente el desempeño del personal médico</label>
+            <label><input type="radio" name="q27" value="d"> d) Generar sanciones automáticas a las áreas con más quejas</label>
+        </div>
+        <div class="question">
+            <p>28. Una persona transgénero acude al módulo y solicita que se le trate con el nombre que ella ha elegido, aunque en su credencial del IMSS aparece otro. El principio de trato digno y no discriminación (LFPED) exige que el Agente:</p>
+            <label><input type="radio" name="q28" value="a"> a) Use exclusivamente el nombre de la credencial, pues es el documento oficial</label>
+            <label><input type="radio" name="q28" value="b"> b) Respete el nombre elegido por la persona en la comunicación verbal, registre la solicitud de actualización si es procedente y brinde un trato respetuoso, sin exponerla a situaciones de discriminación</label>
+            <label><input type="radio" name="q28" value="c"> c) Le indique que primero debe cambiar su documento de identidad antes de recibir trato acorde</label>
+            <label><input type="radio" name="q28" value="d"> d) Consulte con su superior si es "correcto" usar el nombre elegido</label>
+        </div>
+        <div class="question">
+            <p>29. La Ley General de Acceso de las Mujeres a una Vida Libre de Violencia (art. 1° y 13°) define la violencia y establece obligaciones para las instituciones. Un Agente de Trato Digno que recibe a una mujer que reporta violencia familiar debe:</p>
+            <label><input type="radio" name="q29" value="a"> a) Escucharla con empatía, informarle sobre los servicios institucionales y las rutas de atención, y canalizarla a las instancias especializadas, garantizando confidencialidad</label>
+            <label><input type="radio" name="q29" value="b"> b) Convencerla de denunciar penalmente en ese momento, sin importar su decisión</label>
+            <label><input type="radio" name="q29" value="c"> c) Indicarle que regrese cuando tenga pruebas documentales</label>
+            <label><input type="radio" name="q29" value="d"> d) Remitirla directamente al Ministerio Público sin ofrecer otra orientación</label>
+        </div>
+        <div class="question">
+            <p>30. Un Agente de Trato Digno debe diseñar un indicador para medir la calidad del trato en su unidad, alineado con el programa SER IMSS y el enfoque de análisis de datos. El indicador más pertinente sería:</p>
+            <label><input type="radio" name="q30" value="a"> a) Número total de quejas recibidas en el mes, sin desagregación</label>
+            <label><input type="radio" name="q30" value="b"> b) Porcentaje de usuarios que reportan haber sido saludados, escuchados y recibido una respuesta clara, medido mediante encuesta breve post-atención y complementado con el análisis de quejas del SIADE</label>
+            <label><input type="radio" name="q30" value="c"> c) Número de sanciones aplicadas al personal por mal trato</label>
+            <label><input type="radio" name="q30" value="d"> d) Tiempo promedio de espera en el módulo, exclusivamente</label>
+        </div>
+
+        <button type="button" onclick="calificar()">Calificar Cuestionario</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        const answers = {
+            q1:'b', q2:'b', q3:'b', q4:'b', q5:'b',
+            q6:'b', q7:'b',
+            q8:'b', q9:'b', q10:'b',
+            q11:'b', q12:'b',
+            q13:'a', q14:'b', q15:'b',
+            q16:'b', q17:'b', q18:'b', q19:'b', q20:'b',
+            q21:'b', q22:'b', q23:'b', q24:'b', q25:'b',
+            q26:'a', q27:'b', q28:'b', q29:'a', q30:'b'
+        };
+
+        function calificar() {
+            let correctas = 0;
+            const total = 30;
+            let respondidas = 0;
+
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected) {
+                    respondidas++;
+                    if (selected.value === answers[q]) correctas++;
+                }
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+
+            if (respondidas < total) {
+                resultDiv.className = 'warning';
+                resultDiv.innerHTML = `Has respondido ${respondidas} de ${total} preguntas. Por favor, completa todas antes de calificar.`;
+                return;
+            }
+
+            const porcentaje = Math.round((correctas / total) * 100);
+            resultDiv.className = porcentaje >= 70 ? 'correct' : 'incorrect';
+            resultDiv.innerHTML = `Resultado: <strong>${correctas} / ${total}</strong> correctas (${porcentaje}%)<br>${porcentaje >= 70 ? '✅ Aprobado' : '❌ No aprobado. Se recomienda repasar el temario.'}`;
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
