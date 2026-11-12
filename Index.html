@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal de Actividades | IMSS</title>
+
+<style>
+    /* ============================================
+       VARIABLES DE COLOR INSTITUCIONAL IMSS
+       ============================================ */
+    :root {
+        --verde-imss:      #006847;
+        --verde-oscuro:    #004e35;
+        --verde-medio:     #1B7F5A;
+        --verde-claro:     #E6F2EE;
+        --verde-suave:     #F3F9F6;
+        --rojo-imss:       #CE1126;
+        --gris-texto:      #2D3436;
+        --gris-suave:      #6C7A75;
+        --blanco:          #FFFFFF;
+        --sombra:          0 6px 20px rgba(0, 104, 71, 0.12);
+        --sombra-hover:    0 14px 34px rgba(0, 104, 71, 0.24);
+        --radio:           16px;
+        --transicion:      all .35s cubic-bezier(.25,.8,.35,1);
+    }
+
+    /* ============================================
+       RESET Y BASE
+       ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+        font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        background:
+            radial-gradient(circle at 12% 8%, rgba(27,127,90,.10), transparent 45%),
+            radial-gradient(circle at 88% 92%, rgba(0,104,71,.10), transparent 45%),
+            var(--verde-suave);
+        color: var(--gris-texto);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================
+       ENCABEZADO
+       ============================================ */
+    header {
+        background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde-imss) 55%, var(--verde-medio) 100%);
+        color: var(--blanco);
+        padding: 46px 24px 74px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Franja decorativa superior (detalle tipo IMSS) */
+    header::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 8px;
+        background: linear-gradient(90deg, var(--verde-medio), var(--rojo-imss), var(--verde-medio));
+    }
+
+    /* Círculos decorativos */
+    header::after {
+        content: "";
+        position: absolute;
+        width: 420px; height: 420px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.055);
+        top: -190px; right: -130px;
+        pointer-events: none;
+    }
+
+    .header-contenido {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* Escudo / logo simulado */
+    .logo-imss {
+        width: 92px;
+        height: 92px;
+        margin: 0 auto 22px;
+        border-radius: 50%;
+        background: var(--blanco);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,.22);
+        animation: flotar 5s ease-in-out infinite;
+    }
+
+    .logo-imss svg { width: 56px; height: 56px; }
+
+    @keyframes flotar {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-8px); }
+    }
+
+    header h1 {
+        font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+        font-weight: 800;
+        letter-spacing: -.5px;
+        margin-bottom: 12px;
+        text-shadow: 0 2px 10px rgba(0,0,0,.18);
+    }
+
+    header p.subtitulo {
+        font-size: clamp(.95rem, 2.2vw, 1.12rem);
+        color: rgba(255,255,255,.9);
+        max-width: 620px;
+        margin: 0 auto;
+        font-weight: 400;
+    }
+
+    /* Línea divisoria elegante */
+    .divisor {
+        width: 70px;
+        height: 4px;
+        background: rgba(255,255,255,.75);
+        border-radius: 4px;
+        margin: 20px auto 0;
+    }
+
+    /* ============================================
+       CONTENEDOR PRINCIPAL
+       ============================================ */
+    main {
+        flex: 1;
+        width: 100%;
+        max-width: 1180px;
+        margin: -42px auto 0;
+        padding: 0 22px 60px;
+        position: relative;
+        z-index: 3;
+    }
+
+    .titulo-seccion {
+        text-align: center;
+        margin-bottom: 34px;
+    }
+
+    .titulo-seccion h2 {
+        font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+        color: var(--verde-oscuro);
+        font-weight: 700;
+        letter-spacing: .2px;
+    }
+
+    .titulo-seccion span {
+        display: block;
+        font-size: .9rem;
+        color: var(--gris-suave);
+        font-weight: 400;
+        margin-top: 6px;
+    }
+
+    /* ============================================
+       TARJETAS / GRID
+       ============================================ */
+    .grid-actividades {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+        gap: 24px;
+    }
+
+    .tarjeta {
+        background: var(--blanco);
+        border-radius: var(--radio);
+        padding: 30px 26px 26px;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--sombra);
+        border: 1px solid rgba(0,104,71,.09);
+        position: relative;
+        overflow: hidden;
+        transition: var(--transicion);
+    }
+
+    /* Barra superior que aparece al pasar el cursor */
+    .tarjeta::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--verde-imss), var(--verde-medio));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s ease;
+    }
+
+    .tarjeta:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--sombra-hover);
+        border-color: rgba(0,104,71,.22);
+    }
+
+    .tarjeta:hover::before { transform: scaleX(1); }
+
+    /* Icono */
+    .icono {
+        width: 62px;
+        height: 62px;
+        border-radius: 14px;
+        background: var(--verde-claro);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.9rem;
+        margin-bottom: 18px;
+        transition: var(--transicion);
+    }
+
+    .tarjeta:hover .icono {
+        background: linear-gradient(135deg, var(--verde-imss), var(--verde-medio));
+        transform: rotate(-6deg) scale(1.07);
+        box-shadow: 0 8px 18px rgba(0,104,71,.28);
+    }
+
+    .tarjeta h3 {
+        font-size: 1.16rem;
+        color: var(--verde-oscuro);
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .tarjeta p {
+        font-size: .9rem;
+        color: var(--gris-suave);
+        flex: 1;
+        margin-bottom: 20px;
+        line-height: 1.55;
+    }
+
+    /* Botón dentro de la tarjeta */
+    .btn-tarjeta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        align-self: flex-start;
+        padding: 10px 20px;
+        border-radius: 50px;
+        background: var(--verde-claro);
+        color: var(--verde-imss);
+        font-size: .86rem;
+        font-weight: 700;
+        letter-spacing: .3px;
+        transition: var(--transicion);
+    }
+
+    .tarjeta:hover .btn-tarjeta {
+        background: var(--verde-imss);
+        color: var(--blanco);
+    }
+
+    .btn-tarjeta .flecha {
+        transition: transform .3s ease;
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .tarjeta:hover .btn-tarjeta .flecha { transform: translateX(5px); }
+
+    /* Etiqueta de nivel */
+    .nivel {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: .68rem;
+        font-weight: 800;
+        letter-spacing: .7px;
+        text-transform: uppercase;
+        padding: 5px 11px;
+        border-radius: 50px;
+        background: var(--verde-claro);
+        color: var(--verde-imss);
+    }
+
+    .nivel.basico  { background: #E6F2EE; color: #006847; }
+    .nivel.medio   { background: #FFF3E0; color: #B26A00; }
+    .nivel.avanzado{ background: #FDECEE; color: var(--rojo-imss); }
+
+    /* ============================================
+       PIE DE PÁGINA
+       ============================================ */
+    footer {
+        background: var(--verde-oscuro);
+        color: rgba(255,255,255,.82);
+        text-align: center;
+        padding: 26px 20px;
+        font-size: .84rem;
+        position: relative;
+    }
+
+    footer::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--verde-medio), var(--rojo-imss), var(--verde-medio));
+    }
+
+    footer strong { color: var(--blanco); font-weight: 700; }
+
+    /* ============================================
+       ANIMACIÓN DE ENTRADA
+       ============================================ */
+    .tarjeta {
+        animation: aparecer .6s ease both;
+    }
+    .tarjeta:nth-child(1) { animation-delay: .05s; }
+    .tarjeta:nth-child(2) { animation-delay: .13s; }
+    .tarjeta:nth-child(3) { animation-delay: .21s; }
+    .tarjeta:nth-child(4) { animation-delay: .29s; }
+    .tarjeta:nth-child(5) { animation-delay: .37s; }
+    .tarjeta:nth-child(6) { animation-delay: .45s; }
+
+    @keyframes aparecer {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 600px) {
+        header { padding: 36px 18px 66px; }
+        main   { padding: 0 16px 46px; margin-top: -36px; }
+        .grid-actividades { gap: 18px; }
+        .tarjeta { padding: 24px 20px 22px; }
+        .logo-imss { width: 78px; height: 78px; }
+    }
+
+    /* Accesibilidad: foco visible */
+    .tarjeta:focus-visible {
+        outline: 3px solid var(--verde-medio);
+        outline-offset: 4px;
+    }
+</style>
+</head>
+<body>
+
+    <!-- ============================
+         ENCABEZADO
+         ============================ -->
+    <header>
+        <div class="header-contenido">
+
+            <div class="logo-imss" aria-hidden="true">
+                <!-- Cruz / símbolo institucional estilizado -->
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 6v6c0 5.2 3.8 9.4 9 10 5.2-.6 9-4.8 9-10V6l-9-4z"
+                          fill="#006847"/>
+                    <path d="M12 7.2v9.6M7.2 12h9.6"
+                          stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <h1>Portal de Actividades Educativas</h1>
+            <p class="subtitulo">
+                Selecciona una de las actividades disponibles para continuar con tu proceso de aprendizaje.
+            </p>
+            <div class="divisor" aria-hidden="true"></div>
+        </div>
+    </header>
+
+    <!-- ============================
+         CONTENIDO PRINCIPAL
+         ============================ -->
+    <main>
+
+        <div class="titulo-seccion">
+            <h2>Actividades disponibles</h2>
+            <span>Haz clic en cualquier tarjeta para abrir el contenido</span>
+        </div>
+
+        <div class="grid-actividades">
+
+            <!-- 1. Máster -->
+            <a class="tarjeta" href="Máster.html">
+                <span class="nivel avanzado">Máster</span>
+                <div class="icono">🏆</div>
+                <h3>Máster</h3>
+                <p>Contenido de nivel superior con los temas más completos y el mayor grado de dificultad.</p>
+                <span class="btn-tarjeta">Ingresar <span class="flecha">→</span></span>
+            </a>
+
+            <!-- 2. Avanzado -->
+            <a class="tarjeta" href="Avanzado.html">
+                <span class="nivel avanzado">Avanzado</span>
+                <div class="icono">🚀</div>
+                <h3>Avanzado</h3>
+                <p>Refuerza tus conocimientos con ejercicios y contenidos de alta complejidad.</p>
+                <span class="btn-tarjeta">Ingresar <span class="flecha">→</span></span>
+            </a>
+
+            <!-- 3. Newquiz -->
+            <a class="tarjeta" href="Newquiz.html">
+                <span class="nivel medio">Quiz</span>
+                <div class="icono">📝</div>
+                <h3>New Quiz</h3>
+                <p>Nuevo cuestionario interactivo para poner a prueba lo que has aprendido.</p>
+                <span class="btn-tarjeta">Ingresar <span class="flecha">→</span></span>
+            </a>
+
+            <!-- 4. Cuestionario -->
+            <a class="tarjeta" href="cuestionario.html">
+                <span class="nivel medio">Cuestionario</span>
+                <div class="icono">❓</div>
+                <h3>Cuestionario</h3>
+                <p>Preguntas de repaso diseñadas para consolidar los conceptos principales.</p>
+                <span class="btn-tarjeta">Ingresar <span class="flecha">→</span></span>
+            </a>
+
+            <!-- 5. Cuestionario 2 -->
+            <a class="tarjeta" href="custionario2.html">
+                <span class="nivel basico">Cuestionario 2</span>
+                <div class="icono">📋</div>
+                <h3>Cuestionario 2</h3>
+                <p>Segunda parte del cuestionario con nuevas preguntas y temáticas complementarias.</p>
+                <span class="btn-tarjeta">Ingresar <span class="flecha">→</span></span>
+            </a>
+
+            <!-- 6. Quiz Leve 2 -->
+            <a class="tarjeta" href="quizleve2.html">
+                <span class="nivel basico">Quiz Leve</span>
+                <div class="icono">💡</div>
+                <h3>Quiz Leve 2</h3>
+                <p>Evaluación rápida y sencilla ideal para practicar sin presión.</p>
+                <span class="btn-tarjeta">Ingresar <span class="flecha">→</span></span>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- ============================
+         PIE DE PÁGINA
+         ============================ -->
+    <footer>
+        <p><strong>Instituto Mexicano del Seguro Social</strong> · Portal de Actividades Educativas</p>
+        <p>© <span id="anio"></span> Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('anio').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
