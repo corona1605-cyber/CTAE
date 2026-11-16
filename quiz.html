@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Evaluación – Agente de Trato Digno IMSS</title>
+    <style>
+        :root {
+            --verde-imss: #006847;
+            --guinda-imss: #611232;
+            --dorado-imss: #B38E5D;
+            --fondo: #f9f9f9;
+            --texto: #222;
+            --blanco: #ffffff;
+            --gris-claro: #eaeaea;
+            --verde-acierto: #1e7e34;
+            --rojo-error: #c82333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            line-height: 1.6;
+            padding: 1rem;
+        }
+
+        .contenedor {
+            max-width: 960px;
+            margin: 0 auto;
+            background: var(--blanco);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--verde-imss) 0%, #004d33 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 6px solid var(--dorado-imss);
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .instrucciones {
+            background: #e6f2ee;
+            border-left: 5px solid var(--verde-imss);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .bloque {
+            margin: 2rem 1.5rem;
+        }
+
+        .bloque h2 {
+            color: var(--guinda-imss);
+            font-size: 1.25rem;
+            border-bottom: 3px solid var(--dorado-imss);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pregunta {
+            background: var(--blanco);
+            border: 1px solid var(--gris-claro);
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .pregunta:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .pregunta .enunciado {
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--verde-imss);
+        }
+
+        .opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .opcion {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .opcion:hover {
+            background: #f0f7f4;
+        }
+
+        .opcion input[type="radio"] {
+            margin-top: 0.3rem;
+            accent-color: var(--verde-imss);
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .opcion label {
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .opcion.correcta {
+            background: #d4edda;
+            border-color: var(--verde-acierto);
+        }
+
+        .opcion.incorrecta {
+            background: #f8d7da;
+            border-color: var(--rojo-error);
+        }
+
+        .acciones {
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 2px solid var(--gris-claro);
+            margin-top: 2rem;
+        }
+
+        .btn-calificar {
+            background: var(--guinda-imss);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.1s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-calificar:hover {
+            background: #4a0e26;
+        }
+
+        .btn-calificar:active {
+            transform: scale(0.98);
+        }
+
+        .resultado {
+            margin: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .resultado.aprobado {
+            background: #d4edda;
+            color: var(--verde-acierto);
+            border: 2px solid var(--verde-acierto);
+            display: block;
+        }
+
+        .resultado.reprobado {
+            background: #f8d7da;
+            color: var(--rojo-error);
+            border: 2px solid var(--rojo-error);
+            display: block;
+        }
+
+        .aviso {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 1rem;
+            margin: 1rem 1.5rem;
+            border-radius: 6px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        footer {
+            background: var(--guinda-imss);
+            color: white;
+            text-align: center;
+            padding: 1.2rem;
+            font-size: 0.85rem;
+            border-top: 4px solid var(--dorado-imss);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0.5rem;
+            }
+            .bloque {
+                margin: 1.5rem 0.8rem;
+            }
+            header h1 {
+                font-size: 1.2rem;
+            }
+            .pregunta {
+                padding: 1rem;
+            }
+            .btn-calificar {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="contenedor">
+    <header>
+        <h1>Instituto Mexicano del Seguro Social</h1>
+        <p>Cuestionario de Evaluación – Agente de Trato Digno</p>
+        <p>Protocolo de Atención al Usuario Basado en la Cultura de Buen Trato</p>
+    </header>
+
+    <div class="instrucciones">
+        <strong>Instrucciones:</strong> Lea cada reactivo y seleccione la opción que considere correcta conforme a la normativa vigente y los protocolos institucionales. El cuestionario consta de 30 preguntas. Al finalizar, presione el botón <strong>Calificar</strong>. Se requiere un mínimo del 70% de aciertos para aprobar.
+    </div>
+
+    <div id="aviso" class="aviso">Debe responder todas las preguntas antes de calificar.</div>
+
+    <form id="cuestionario">
+        <!-- BLOQUE I -->
+        <div class="bloque">
+            <h2>Bloque I. Marco constitucional y seguridad social</h2>
+
+            <div class="pregunta" data-pregunta="1">
+                <div class="enunciado">1. Una persona acude a una Unidad de Medicina Familiar del IMSS y solicita atención médica sin haber cumplido el periodo de conservación de derechos. El personal de admisión le indica que no puede ser atendida. Conforme al artículo 4º constitucional, ¿cuál es la implicación práctica de este derecho en el contexto del IMSS?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p1" id="p1a" value="A"><label for="p1a">A) El derecho a la salud es exigible únicamente a través de los servicios de la seguridad social, por lo que la negativa es válida si no se cumple con los requisitos legales.</label></div>
+                    <div class="opcion"><input type="radio" name="p1" id="p1b" value="B"><label for="p1b">B) El derecho a la protección de la salud es un derecho humano que obliga al Estado a garantizar servicios sin discriminación, pero el IMSS como organismo de seguridad social puede condicionar la atención a la acreditación de la vigencia de derechos conforme a la Ley del Seguro Social.</label></div>
+                    <div class="opcion"><input type="radio" name="p1" id="p1c" value="C"><label for="p1c">C) El derecho a la salud es absoluto y ninguna circunstancia administrativa puede limitar la atención, por lo que la negativa constituye una violación directa al artículo 4º.</label></div>
+                    <div class="opcion"><input type="radio" name="p1" id="p1d" value="D"><label for="p1d">D) El artículo 4º sólo reconoce el derecho a la salud para los trabajadores formales, por lo que la negativa es correcta si la persona no cotiza.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="2">
+                <div class="enunciado">2. El artículo 123, apartado A, fracción XXIX, de la CPEUM establece que es de utilidad pública la Ley del Seguro Social. ¿Cuál de las siguientes afirmaciones refleja mejor el alcance de esta disposición para un Agente de Trato Digno?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p2" id="p2a" value="A"><label for="p2a">A) La fracción XXIX obliga a los patrones a contratar seguros privados para sus trabajadores, y el IMSS sólo administra los recursos.</label></div>
+                    <div class="opcion"><input type="radio" name="p2" id="p2b" value="B"><label for="p2b">B) La fracción XXIX constitucionaliza el derecho a la seguridad social, lo que implica que las prestaciones del IMSS (salud, pensiones, riesgos de trabajo) tienen rango constitucional y su prestación es una obligación pública, no una concesión graciosa.</label></div>
+                    <div class="opcion"><input type="radio" name="p2" id="p2c" value="C"><label for="p2c">C) La fracción XXIX sólo aplica a los trabajadores al servicio del Estado, y los derechohabientes del IMSS se rigen por el apartado B.</label></div>
+                    <div class="opcion"><input type="radio" name="p2" id="p2d" value="D"><label for="p2d">D) La fracción XXIX faculta al IMSS a negar servicios cuando exista insuficiencia presupuestal, sin que ello vulnere derecho alguno.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="3">
+                <div class="enunciado">3. Una persona solicita información sobre los requisitos para obtener una pensión de viudez. El Agente de Trato Digno debe orientarla. De acuerdo con la Ley del Seguro Social (arts. 1º-26º), ¿qué principio rige la organización y administración del IMSS en materia de prestaciones?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p3" id="p3a" value="A"><label for="p3a">A) El principio de solidaridad intergeneracional, donde los trabajadores activos financian a los pensionados, y el IMSS administra los recursos con autonomía técnica.</label></div>
+                    <div class="opcion"><input type="radio" name="p3" id="p3b" value="B"><label for="p3b">B) El principio de capitalización individual, donde cada trabajador acumula fondos en una cuenta personal y el IMSS sólo funge como custodio.</label></div>
+                    <div class="opcion"><input type="radio" name="p3" id="p3c" value="C"><label for="p3c">C) El principio de asistencia social, donde el IMSS atiende a toda la población sin importar su relación laboral.</label></div>
+                    <div class="opcion"><input type="radio" name="p3" id="p3d" value="D"><label for="p3d">D) El principio de subsidio estatal directo, donde el gobierno federal cubre el 100% de las pensiones.</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE II -->
+        <div class="bloque">
+            <h2>Bloque II. Transparencia y protección de datos personales</h2>
+
+            <div class="pregunta" data-pregunta="4">
+                <div class="enunciado">4. Un derechohabiente solicita copia de su expediente clínico. El área médica se niega argumentando que se trata de información confidencial. Conforme a la Ley General de Transparencia y Acceso a la Información Pública vigente (nueva ley de marzo de 2025), ¿cuál es la vía correcta para el usuario?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p4" id="p4a" value="A"><label for="p4a">A) Solicitar la información a través del Sistema SIADE, ya que el expediente clínico es información pública de oficio.</label></div>
+                    <div class="opcion"><input type="radio" name="p4" id="p4b" value="B"><label for="p4b">B) Ejercer su derecho de acceso a datos personales ante la Unidad de Transparencia del IMSS, pues el expediente clínico contiene datos personales sensibles y su titular tiene derecho a acceder a ellos.</label></div>
+                    <div class="opcion"><input type="radio" name="p4" id="p4c" value="C"><label for="p4c">C) Presentar una queja ante la Comisión Nacional de los Derechos Humanos, ya que la negativa constituye una violación al derecho a la salud.</label></div>
+                    <div class="opcion"><input type="radio" name="p4" id="p4d" value="D"><label for="p4d">D) Acudir directamente al INAI para que ordene la entrega inmediata del expediente, sin necesidad de agotar la vía interna.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="5">
+                <div class="enunciado">5. El Agente de Trato Digno recibe una solicitud de información sobre el número de quejas por maltrato registradas en un hospital. La solicitud no especifica el periodo ni el área. De acuerdo con los lineamientos del Sistema SIADE y la Ley General de Transparencia, ¿cómo debe proceder?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p5" id="p5a" value="A"><label for="p5a">A) Rechazar la solicitud por ser genérica y no cumplir con los requisitos mínimos.</label></div>
+                    <div class="opcion"><input type="radio" name="p5" id="p5b" value="B"><label for="p5b">B) Orientar al solicitante para que precise el periodo y el área, y en caso de que no lo haga, solicitar una prevención para que aclare su petición, conforme al principio de máxima publicidad.</label></div>
+                    <div class="opcion"><input type="radio" name="p5" id="p5c" value="C"><label for="p5c">C) Remitir la solicitud al área de estadística para que elabore un informe con todos los datos disponibles, sin importar la falta de precisión.</label></div>
+                    <div class="opcion"><input type="radio" name="p5" id="p5d" value="D"><label for="p5d">D) Clasificar la información como reservada por tratarse de datos estadísticos internos.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="6">
+                <div class="enunciado">6. Una persona solicita la rectificación de un dato erróneo en su expediente clínico. El personal administrativo le indica que debe presentar una solicitud de acceso a la información. Conforme a la Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados (nueva ley de marzo de 2025), ¿cuál es el derecho que debe ejercer y ante qué instancia?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p6" id="p6a" value="A"><label for="p6a">A) Derecho de acceso, ante la Unidad de Transparencia.</label></div>
+                    <div class="opcion"><input type="radio" name="p6" id="p6b" value="B"><label for="p6b">B) Derecho de rectificación, ante el responsable del tratamiento de los datos (la unidad médica o la coordinación de datos personales del IMSS).</label></div>
+                    <div class="opcion"><input type="radio" name="p6" id="p6c" value="C"><label for="p6c">C) Derecho de oposición, ante el INAI.</label></div>
+                    <div class="opcion"><input type="radio" name="p6" id="p6d" value="D"><label for="p6d">D) Derecho de cancelación, ante la Secretaría Anticorrupción y Buen Gobierno.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="7">
+                <div class="enunciado">7. El principio de "licitud" en el tratamiento de datos personales implica que:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p7" id="p7a" value="A"><label for="p7a">A) Los datos sólo pueden tratarse con el consentimiento expreso y por escrito del titular para cualquier finalidad.</label></div>
+                    <div class="opcion"><input type="radio" name="p7" id="p7b" value="B"><label for="p7b">B) El tratamiento debe realizarse conforme a las atribuciones que la ley confiere al sujeto obligado y sólo para el cumplimiento de sus funciones.</label></div>
+                    <div class="opcion"><input type="radio" name="p7" id="p7c" value="C"><label for="p7c">C) Los datos deben ser exactos y actualizados, eliminando aquellos que ya no sean necesarios.</label></div>
+                    <div class="opcion"><input type="radio" name="p7" id="p7d" value="D"><label for="p7d">D) El sujeto obligado debe informar al titular sobre la existencia y finalidad del tratamiento en el momento de la recolección.</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE III -->
+        <div class="bloque">
+            <h2>Bloque III. Responsabilidades administrativas y ética pública</h2>
+
+            <div class="pregunta" data-pregunta="8">
+                <div class="enunciado">8. Un Agente de Trato Digno, durante su jornada laboral, utiliza la base de datos del SIADE para consultar información de un familiar sin tener atribución para ello. Esta conducta, conforme a la Ley General de Responsabilidades Administrativas (reformada en diciembre de 2025), se clasifica como:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p8" id="p8a" value="A"><label for="p8a">A) Falta no grave, por tratarse de un uso indebido de información sin lucro personal.</label></div>
+                    <div class="opcion"><input type="radio" name="p8" id="p8b" value="B"><label for="p8b">B) Falta grave, por el uso indebido de información confidencial a la que tiene acceso por su empleo, cargo o comisión.</label></div>
+                    <div class="opcion"><input type="radio" name="p8" id="p8c" value="C"><label for="p8c">C) Delito penal, exclusivamente, por violación de datos personales, sin responsabilidad administrativa.</label></div>
+                    <div class="opcion"><input type="radio" name="p8" id="p8d" value="D"><label for="p8d">D) Conducta atípica, ya que no está prevista en la ley al no existir daño patrimonial.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="9">
+                <div class="enunciado">9. De acuerdo con la Ley General de Responsabilidades Administrativas, ¿cuál es la diferencia entre una falta grave y una falta no grave?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p9" id="p9a" value="A"><label for="p9a">A) Las faltas graves son sancionadas con amonestación pública, y las no graves con inhabilitación temporal.</label></div>
+                    <div class="opcion"><input type="radio" name="p9" id="p9b" value="B"><label for="p9b">B) Las faltas graves afectan la legalidad, honradez, lealtad, imparcialidad y eficiencia en el servicio público, y pueden sancionarse con suspensión, destitución o inhabilitación; las no graves se sancionan con amonestación o apercibimiento.</label></div>
+                    <div class="opcion"><input type="radio" name="p9" id="p9c" value="C"><label for="p9c">C) Las faltas graves sólo las comete el personal de mando, y las no graves el personal operativo.</label></div>
+                    <div class="opcion"><input type="radio" name="p9" id="p9d" value="D"><label for="p9d">D) No existe diferencia legal; ambas se sancionan de igual forma según el criterio del superior jerárquico.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="10">
+                <div class="enunciado">10. El artículo 49 de la Ley General de Responsabilidades Administrativas establece los principios que rigen la actuación de los servidores públicos. ¿Cuál de las siguientes opciones enumera correctamente algunos de estos principios?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p10" id="p10a" value="A"><label for="p10a">A) Legalidad, honradez, lealtad, imparcialidad y eficiencia.</label></div>
+                    <div class="opcion"><input type="radio" name="p10" id="p10b" value="B"><label for="p10b">B) Solidaridad, subsidiariedad, transparencia y equidad.</label></div>
+                    <div class="opcion"><input type="radio" name="p10" id="p10c" value="C"><label for="p10c">C) Confidencialidad, proporcionalidad, licitud y consentimiento.</label></div>
+                    <div class="opcion"><input type="radio" name="p10" id="p10d" value="D"><label for="p10d">D) Jerarquía, disciplina, obediencia y subordinación.</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE IV -->
+        <div class="bloque">
+            <h2>Bloque IV. No discriminación, igualdad y perspectiva de género</h2>
+
+            <div class="pregunta" data-pregunta="11">
+                <div class="enunciado">11. Una mujer indígena acude al IMSS y solicita atención en su lengua materna. El personal de admisión le indica que debe hablar español para ser atendida. Conforme a la Ley Federal para Prevenir y Eliminar la Discriminación (reformada en noviembre de 2025), esta conducta constituye:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p11" id="p11a" value="A"><label for="p11a">A) Una práctica administrativa válida, ya que el idioma oficial es el español.</label></div>
+                    <div class="opcion"><input type="radio" name="p11" id="p11b" value="B"><label for="p11b">B) Un acto de discriminación por origen étnico y por lengua, que vulnera el derecho a la igualdad y no discriminación.</label></div>
+                    <div class="opcion"><input type="radio" name="p11" id="p11c" value="C"><label for="p11c">C) Una falta no grave, sancionable sólo con amonestación.</label></div>
+                    <div class="opcion"><input type="radio" name="p11" id="p11d" value="D"><label for="p11d">D) Una conducta justificada por la necesidad de garantizar la comunicación efectiva en la atención médica.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="12">
+                <div class="enunciado">12. La Ley General para la Igualdad entre Mujeres y Hombres (reformada en enero de 2026) distingue entre igualdad formal e igualdad sustantiva. ¿Cuál de las siguientes afirmaciones describe correctamente la igualdad sustantiva?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p12" id="p12a" value="A"><label for="p12a">A) Es la igualdad ante la ley, que prohíbe cualquier distinción basada en el sexo.</label></div>
+                    <div class="opcion"><input type="radio" name="p12" id="p12b" value="B"><label for="p12b">B) Es la igualdad de oportunidades que se logra cuando se eliminan las barreras estructurales que impiden a las mujeres ejercer sus derechos en condiciones de paridad.</label></div>
+                    <div class="opcion"><input type="radio" name="p12" id="p12c" value="C"><label for="p12c">C) Es la igualdad de resultados, que obliga a que hombres y mujeres ocupen exactamente el mismo número de puestos en todos los niveles.</label></div>
+                    <div class="opcion"><input type="radio" name="p12" id="p12d" value="D"><label for="p12d">D) Es la igualdad de trato, que exige que se apliquen las mismas reglas a todos sin excepción.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="13">
+                <div class="enunciado">13. De acuerdo con la Ley General de Acceso de las Mujeres a una Vida Libre de Violencia (reformada en enero de 2026), ¿cuál de los siguientes tipos de violencia se ejerce cuando se impide a una mujer el acceso a la atención médica de emergencia?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p13" id="p13a" value="A"><label for="p13a">A) Violencia psicológica.</label></div>
+                    <div class="opcion"><input type="radio" name="p13" id="p13b" value="B"><label for="p13b">B) Violencia patrimonial.</label></div>
+                    <div class="opcion"><input type="radio" name="p13" id="p13c" value="C"><label for="p13c">C) Violencia institucional.</label></div>
+                    <div class="opcion"><input type="radio" name="p13" id="p13d" value="D"><label for="p13d">D) Violencia económica.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="14">
+                <div class="enunciado">14. La CEDAW (Convención sobre la Eliminación de todas las formas de Discriminación contra la Mujer), en sus artículos 2º a 4º, obliga a los Estados Parte a:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p14" id="p14a" value="A"><label for="p14a">A) Adoptar medidas temporales de acción afirmativa para acelerar la igualdad de facto, las cuales cesarán cuando se alcancen los objetivos de igualdad.</label></div>
+                    <div class="opcion"><input type="radio" name="p14" id="p14b" value="B"><label for="p14b">B) Establecer cuotas de género permanentes en todos los órganos de gobierno.</label></div>
+                    <div class="opcion"><input type="radio" name="p14" id="p14c" value="C"><label for="p14c">C) Prohibir cualquier distinción basada en el sexo, incluyendo las medidas de acción afirmativa.</label></div>
+                    <div class="opcion"><input type="radio" name="p14" id="p14d" value="D"><label for="p14d">D) Delegar en el sector privado la eliminación de la discriminación contra la mujer.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="15">
+                <div class="enunciado">15. Un Agente de Trato Digno atiende a una persona transgénero que solicita ser llamada por su nombre social. De acuerdo con la Guía de lenguaje incluyente y no sexista del IMSS, la conducta correcta es:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p15" id="p15a" value="A"><label for="p15a">A) Utilizar el nombre que aparece en el documento oficial, ya que es el único válido para efectos administrativos.</label></div>
+                    <div class="opcion"><input type="radio" name="p15" id="p15b" value="B"><label for="p15b">B) Preguntar a la persona cómo desea ser llamada y utilizar ese nombre en la comunicación verbal, sin perjuicio de los datos que deban constar en documentos oficiales.</label></div>
+                    <div class="opcion"><input type="radio" name="p15" id="p15c" value="C"><label for="p15c">C) Remitir a la persona al área jurídica para que solicite el cambio de nombre en el expediente.</label></div>
+                    <div class="opcion"><input type="radio" name="p15" id="p15d" value="D"><label for="p15d">D) Evitar dirigirse a la persona por su nombre para no cometer errores.</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE V -->
+        <div class="bloque">
+            <h2>Bloque V. Protocolos de actuación y cultura de buen trato</h2>
+
+            <div class="pregunta" data-pregunta="16">
+                <div class="enunciado">16. Una persona acude al IMSS y, al recibir una negativa de atención, comienza a gritar e insultar al personal. De acuerdo con el Protocolo para Tratar con Personas que están Molestas (SER IMSS), ¿cuál es la primera acción que debe realizar el Agente de Trato Digno?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p16" id="p16a" value="A"><label for="p16a">A) Solicitar el apoyo de seguridad para retirar a la persona del área.</label></div>
+                    <div class="opcion"><input type="radio" name="p16" id="p16b" value="B"><label for="p16b">B) Mantener la calma, escuchar activamente sin interrumpir y permitir que la persona exprese su inconformidad.</label></div>
+                    <div class="opcion"><input type="radio" name="p16" id="p16c" value="C"><label for="p16c">C) Indicar a la persona que no puede continuar con esa actitud y que debe moderar su lenguaje.</label></div>
+                    <div class="opcion"><input type="radio" name="p16" id="p16d" value="D"><label for="p16d">D) Ignorar la conducta y continuar con sus labores, ya que no es su responsabilidad atender personas agresivas.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="17">
+                <div class="enunciado">17. El Protocolo Básico de Buen Trato del IMSS establece elementos clave para la interacción con el usuario. ¿Cuál de los siguientes NO es un elemento de este protocolo?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p17" id="p17a" value="A"><label for="p17a">A) Utilizar un tono de voz moderado y amable.</label></div>
+                    <div class="opcion"><input type="radio" name="p17" id="p17b" value="B"><label for="p17b">B) Mantener contacto visual adecuado.</label></div>
+                    <div class="opcion"><input type="radio" name="p17" id="p17c" value="C"><label for="p17c">C) Utilizar el nombre del usuario durante la interacción.</label></div>
+                    <div class="opcion"><input type="radio" name="p17" id="p17d" value="D"><label for="p17d">D) Aplicar sanciones administrativas inmediatas por faltas de respeto.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="18">
+                <div class="enunciado">18. Un Agente de Trato Digno debe comunicar a una familia el fallecimiento de un paciente. Conforme al Protocolo para dar Malas Noticias Médicas en Primer Nivel, ¿cuál es el criterio central que debe guiar esta comunicación?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p18" id="p18a" value="A"><label for="p18a">A) Informar de manera directa y sin rodeos, para evitar falsas esperanzas.</label></div>
+                    <div class="opcion"><input type="radio" name="p18" id="p18b" value="B"><label for="p18b">B) Comunicar la noticia de forma empática, en un espacio privado, verificando la comprensión de la información y ofreciendo apoyo emocional.</label></div>
+                    <div class="opcion"><input type="radio" name="p18" id="p18c" value="C"><label for="p18c">C) Delegar la comunicación al médico tratante, ya que el Agente de Trato Digno no está facultado para dar malas noticias.</label></div>
+                    <div class="opcion"><input type="radio" name="p18" id="p18d" value="D"><label for="p18d">D) Entregar un documento escrito con la información y limitarse a responder dudas.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="19">
+                <div class="enunciado">19. El Protocolo para la Prevención, Atención y Sanción del Hostigamiento Sexual y Acoso Sexual del IMSS distingue entre hostigamiento y acoso sexual. ¿Cuál es la diferencia técnica entre ambos?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p19" id="p19a" value="A"><label for="p19a">A) El hostigamiento sexual se da entre iguales jerárquicos, y el acoso sexual entre superiores y subordinados.</label></div>
+                    <div class="opcion"><input type="radio" name="p19" id="p19b" value="B"><label for="p19b">B) El hostigamiento sexual implica un ejercicio de poder de una persona con posición jerárquica superior sobre otra, mientras que el acoso sexual puede ocurrir entre pares o incluso de subordinado a superior.</label></div>
+                    <div class="opcion"><input type="radio" name="p19" id="p19c" value="C"><label for="p19c">C) El hostigamiento sexual es una conducta única y grave, y el acoso sexual es una conducta reiterada y leve.</label></div>
+                    <div class="opcion"><input type="radio" name="p19" id="p19d" value="D"><label for="p19d">D) No existe diferencia legal; ambos términos son sinónimos en el protocolo del IMSS.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="20">
+                <div class="enunciado">20. Una derechohabiente con discapacidad visual acude a solicitar una prótesis ocular. De acuerdo con las Claves para el Trato Adecuado a Personas con Discapacidad (SER IMSS), ¿cuál es la acción correcta del Agente de Trato Digno?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p20" id="p20a" value="A"><label for="p20a">A) Dirigirse a la persona que la acompaña, ya que es más eficiente para obtener la información.</label></div>
+                    <div class="opcion"><input type="radio" name="p20" id="p20b" value="B"><label for="p20b">B) Hablar directamente a la persona con discapacidad, describirle los documentos que debe firmar y ofrecerle el tiempo necesario para orientarse.</label></div>
+                    <div class="opcion"><input type="radio" name="p20" id="p20c" value="C"><label for="p20c">C) Asumir que la persona no puede comprender el procedimiento y limitarse a entregarle un folleto.</label></div>
+                    <div class="opcion"><input type="radio" name="p20" id="p20d" value="D"><label for="p20d">D) Remitirla a una unidad especializada, ya que el IMSS no cuenta con protocolos para personas con discapacidad visual.</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE VI -->
+        <div class="bloque">
+            <h2>Bloque VI. Sistema SIADE y gestión de peticiones</h2>
+
+            <div class="pregunta" data-pregunta="21">
+                <div class="enunciado">21. El Agente de Trato Digno recibe una petición ciudadana a través del SIADE que corresponde a un área distinta a la suya. De acuerdo con el Lineamiento que regula el análisis de las peticiones ciudadanas en los Órganos de Operación Administrativa Desconcentrada (OOAD), ¿cuál es el procedimiento correcto?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p21" id="p21a" value="A"><label for="p21a">A) Rechazar la petición y notificar al ciudadano que se equivocó de área.</label></div>
+                    <div class="opcion"><input type="radio" name="p21" id="p21b" value="B"><label for="p21b">B) Analizar la petición y, si es competencia de otra área, canalizarla oportunamente a la instancia correspondiente, registrando la acción en el sistema.</label></div>
+                    <div class="opcion"><input type="radio" name="p21" id="p21c" value="C"><label for="p21c">C) Responder al ciudadano que su petición será atendida en un plazo no mayor a 30 días hábiles, sin necesidad de canalizarla.</label></div>
+                    <div class="opcion"><input type="radio" name="p21" id="p21d" value="D"><label for="p21d">D) Archivar la petición como improcedente por falta de competencia.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="22">
+                <div class="enunciado">22. El Manual de Usuario del SIADE establece que el análisis de las peticiones ciudadanas debe realizarse con un enfoque de:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p22" id="p22a" value="A"><label for="p22a">A) Máxima publicidad, privilegiando la entrega de información sobre cualquier otra consideración.</label></div>
+                    <div class="opcion"><input type="radio" name="p22" id="p22b" value="B"><label for="p22b">B) Calidad y calidez, considerando la perspectiva de derechos humanos y la mejora continua del servicio.</label></div>
+                    <div class="opcion"><input type="radio" name="p22" id="p22c" value="C"><label for="p22c">C) Eficiencia administrativa, reduciendo al mínimo los tiempos de respuesta.</label></div>
+                    <div class="opcion"><input type="radio" name="p22" id="p22d" value="D"><label for="p22d">D) Confidencialidad absoluta, sin posibilidad de transparentar los resultados.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="23">
+                <div class="enunciado">23. Un Agente de Trato Digno detecta que un alto porcentaje de quejas en su unidad se refiere a tiempos de espera prolongados. Conforme a los proyectos de mejora sugeridos en el temario (Tablero de Control de Peticiones Ciudadanas), ¿cuál sería la acción más adecuada?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p23" id="p23a" value="A"><label for="p23a">A) Ignorar el dato, ya que los tiempos de espera son un problema estructural que no compete al Agente de Trato Digno.</label></div>
+                    <div class="opcion"><input type="radio" name="p23" id="p23b" value="B"><label for="p23b">B) Proponer la creación de un tablero de control que cruce los datos del SIADE con los tiempos de respuesta de las unidades médicas, para identificar cuellos de botella y reducir quejas recurrentes.</label></div>
+                    <div class="opcion"><input type="radio" name="p23" id="p23c" value="C"><label for="p23c">C) Sancionar al personal médico por las demoras, como medida disuasoria.</label></div>
+                    <div class="opcion"><input type="radio" name="p23" id="p23d" value="D"><label for="p23d">D) Enviar un oficio a la Dirección General del IMSS para que modifique los procedimientos de atención.</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE VII -->
+        <div class="bloque">
+            <h2>Bloque VII. Preguntas capciosas y de definición técnica</h2>
+
+            <div class="pregunta" data-pregunta="24">
+                <div class="enunciado">24. Una persona solicita información sobre el presupuesto del IMSS y, en la misma solicitud, pide copia de su expediente clínico. El Agente de Trato Digno debe distinguir entre el derecho de acceso a la información pública y el derecho de acceso a datos personales. ¿Cuál de las siguientes afirmaciones es correcta?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p24" id="p24a" value="A"><label for="p24a">A) Ambas solicitudes se tramitan por la misma vía (SIADE) y con los mismos plazos.</label></div>
+                    <div class="opcion"><input type="radio" name="p24" id="p24b" value="B"><label for="p24b">B) La información presupuestal es pública y se solicita vía transparencia; el expediente clínico contiene datos personales sensibles y su acceso se ejerce por la vía de protección de datos personales.</label></div>
+                    <div class="opcion"><input type="radio" name="p24" id="p24c" value="C"><label for="p24c">C) El expediente clínico es información pública, ya que el IMSS es un sujeto obligado.</label></div>
+                    <div class="opcion"><input type="radio" name="p24" id="p24d" value="D"><label for="p24d">D) La solicitud es improcedente por acumular dos derechos incompatibles.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="25">
+                <div class="enunciado">25. El artículo 20 de la Ley General de Transparencia (vigente) establece los principios en materia de transparencia. ¿Cuál de los siguientes principios NO corresponde a este artículo?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p25" id="p25a" value="A"><label for="p25a">A) Principio de máxima publicidad.</label></div>
+                    <div class="opcion"><input type="radio" name="p25" id="p25b" value="B"><label for="p25b">B) Principio de accesibilidad.</label></div>
+                    <div class="opcion"><input type="radio" name="p25" id="p25c" value="C"><label for="p25c">C) Principio de solidaridad.</label></div>
+                    <div class="opcion"><input type="radio" name="p25" id="p25d" value="D"><label for="p25d">D) Principio de veracidad.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="26">
+                <div class="enunciado">26. Un servidor público del IMSS, sin ánimo de lucro, retrasa intencionalmente la atención a un derechohabiente como represalia por una queja previa. Conforme a la Ley General de Responsabilidades Administrativas, esta conducta constituye:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p26" id="p26a" value="A"><label for="p26a">A) Una falta no grave, ya que no hay beneficio económico.</label></div>
+                    <div class="opcion"><input type="radio" name="p26" id="p26b" value="B"><label for="p26b">B) Una falta grave, por afectar la eficiencia en el servicio público y la imparcialidad.</label></div>
+                    <div class="opcion"><input type="radio" name="p26" id="p26c" value="C"><label for="p26c">C) Un delito de abuso de autoridad, exclusivamente.</label></div>
+                    <div class="opcion"><input type="radio" name="p26" id="p26d" value="D"><label for="p26d">D) Una conducta atípica, al no estar prevista en la ley.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="27">
+                <div class="enunciado">27. La Ley General de Protección de Datos Personales (nueva ley de marzo de 2025) establece que el consentimiento del titular para el tratamiento de datos personales puede ser:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p27" id="p27a" value="A"><label for="p27a">A) Sólo expreso y por escrito, sin excepciones.</label></div>
+                    <div class="opcion"><input type="radio" name="p27" id="p27b" value="B"><label for="p27b">B) Expreso o tácito, dependiendo de la naturaleza de los datos y de la finalidad del tratamiento.</label></div>
+                    <div class="opcion"><input type="radio" name="p27" id="p27c" value="C"><label for="p27c">C) Únicamente tácito, derivado de la relación jurídica entre el titular y el sujeto obligado.</label></div>
+                    <div class="opcion"><input type="radio" name="p27" id="p27d" value="D"><label for="p27d">D) Implícito para todos los datos personales, salvo los sensibles.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="28">
+                <div class="enunciado">28. Una mujer solicita atención médica y el personal de admisión le pregunta si está casada o tiene pareja, sin que ello sea necesario para el servicio. Conforme a la Ley General de Acceso de las Mujeres a una Vida Libre de Violencia y a la Ley General para la Igualdad entre Mujeres y Hombres, esta práctica puede constituir:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p28" id="p28a" value="A"><label for="p28a">A) Una medida de control administrativo válida para identificar beneficiarios.</label></div>
+                    <div class="opcion"><input type="radio" name="p28" id="p28b" value="B"><label for="p28b">B) Un acto de discriminación por estado civil y una manifestación de violencia institucional.</label></div>
+                    <div class="opcion"><input type="radio" name="p28" id="p28c" value="C"><label for="p28c">C) Una falta no grave, sancionable sólo con amonestación verbal.</label></div>
+                    <div class="opcion"><input type="radio" name="p28" id="p28d" value="D"><label for="p28d">D) Una conducta justificada por la necesidad de recabar datos estadísticos.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="29">
+                <div class="enunciado">29. El Protocolo para Prevenir, Atender y Sancionar el Hostigamiento Sexual y Acoso Sexual del IMSS establece que la denuncia por hostigamiento sexual puede presentarse:</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p29" id="p29a" value="A"><label for="p29a">A) Únicamente por escrito y ante la Dirección de Recursos Humanos.</label></div>
+                    <div class="opcion"><input type="radio" name="p29" id="p29b" value="B"><label for="p29b">B) De manera verbal o escrita, ante cualquier instancia del IMSS, incluyendo la Unidad de Atención a la Derechohabiencia.</label></div>
+                    <div class="opcion"><input type="radio" name="p29" id="p29c" value="C"><label for="p29c">C) Sólo ante el Órgano Interno de Control.</label></div>
+                    <div class="opcion"><input type="radio" name="p29" id="p29d" value="D"><label for="p29d">D) Exclusivamente a través del SIADE.</label></div>
+                </div>
+            </div>
+
+            <div class="pregunta" data-pregunta="30">
+                <div class="enunciado">30. El Reglamento Interior del IMSS, en su Título Segundo, establece las atribuciones de la Unidad de Atención a la Derechohabiencia. ¿Cuál de las siguientes funciones corresponde a esta unidad, según el Manual de Organización de la Dirección de Operación y Evaluación (punto 7.1.3)?</div>
+                <div class="opciones">
+                    <div class="opcion"><input type="radio" name="p30" id="p30a" value="A"><label for="p30a">A) Administrar los recursos financieros del IMSS.</label></div>
+                    <div class="opcion"><input type="radio" name="p30" id="p30b" value="B"><label for="p30b">B) Coordinar la atención y orientación a los derechohabientes, así como dar seguimiento a quejas y sugerencias.</label></div>
+                    <div class="opcion"><input type="radio" name="p30" id="p30c" value="C"><label for="p30c">C) Emitir las políticas de inversión en infraestructura hospitalaria.</label></div>
+                    <div class="opcion"><input type="radio" name="p30" id="p30d" value="D"><label for="p30d">D) Representar legalmente al IMSS en juicios laborales.</label></div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div id="resultado" class="resultado"></div>
+
+    <div class="acciones">
+        <button type="button" class="btn-calificar" id="btnCalificar">Calificar</button>
+    </div>
+
+    <footer>
+        Instituto Mexicano del Seguro Social | Cuestionario de Evaluación – Agente de Trato Digno
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // Clave de respuestas (no se muestra en pantalla)
+        const CLAVE = {
+            p1: 'B', p2: 'B', p3: 'A', p4: 'B', p5: 'B',
+            p6: 'B', p7: 'B', p8: 'B', p9: 'B', p10: 'A',
+            p11: 'B', p12: 'B', p13: 'C', p14: 'A', p15: 'B',
+            p16: 'B', p17: 'D', p18: 'B', p19: 'B', p20: 'B',
+            p21: 'B', p22: 'B', p23: 'B', p24: 'B', p25: 'C',
+            p26: 'B', p27: 'B', p28: 'B', p29: 'B', p30: 'B'
+        };
+
+        const TOTAL = 30;
+        const btn = document.getElementById('btnCalificar');
+        const resultadoDiv = document.getElementById('resultado');
+        const avisoDiv = document.getElementById('aviso');
+        const form = document.getElementById('cuestionario');
+
+        btn.addEventListener('click', function() {
+            // Ocultar aviso previo
+            avisoDiv.style.display = 'none';
+
+            // Verificar que todas las preguntas estén respondidas
+            let todasRespondidas = true;
+            for (let i = 1; i <= TOTAL; i++) {
+                const radios = document.getElementsByName('p' + i);
+                let respondida = false;
+                for (const radio of radios) {
+                    if (radio.checked) {
+                        respondida = true;
+                        break;
+                    }
+                }
+                if (!respondida) {
+                    todasRespondidas = false;
+                    break;
+                }
+            }
+
+            if (!todasRespondidas) {
+                avisoDiv.style.display = 'block';
+                avisoDiv.textContent = 'Debe responder todas las preguntas antes de calificar.';
+                return;
+            }
+
+            // Calificar
+            let aciertos = 0;
+            for (let i = 1; i <= TOTAL; i++) {
+                const nombre = 'p' + i;
+                const radios = document.getElementsByName(nombre);
+                let seleccion = null;
+                for (const radio of radios) {
+                    if (radio.checked) {
+                        seleccion = radio.value;
+                        break;
+                    }
+                }
+
+                const preguntaDiv = document.querySelector(`.pregunta[data-pregunta="${i}"]`);
+                const opciones = preguntaDiv.querySelectorAll('.opcion');
+
+                // Limpiar clases previas
+                opciones.forEach(op => op.classList.remove('correcta', 'incorrecta'));
+
+                // Marcar correcta e incorrecta
+                opciones.forEach(op => {
+                    const input = op.querySelector('input[type="radio"]');
+                    if (input.value === CLAVE[nombre]) {
+                        op.classList.add('correcta');
+                    }
+                    if (input.checked && input.value !== CLAVE[nombre]) {
+                        op.classList.add('incorrecta');
+                    }
+                });
+
+                if (seleccion === CLAVE[nombre]) {
+                    aciertos++;
+                }
+            }
+
+            // Mostrar resultado
+            const porcentaje = Math.round((aciertos / TOTAL) * 100);
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.className = 'resultado ' + (porcentaje >= 70 ? 'aprobado' : 'reprobado');
+            resultadoDiv.innerHTML = `Aciertos: ${aciertos} / ${TOTAL} &nbsp;|&nbsp; Porcentaje: ${porcentaje}% &nbsp;|&nbsp; ${porcentaje >= 70 ? 'APROBADO' : 'REPROBADO (se requiere ≥70%)'}`;
+
+            // Desplazar al resultado
+            resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    })();
+</script>
+</body>
+</html>
